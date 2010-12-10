@@ -1,0 +1,38 @@
+﻿table
+{
+    border-collapse:collapse;
+    border:1px solid black;
+    text-align:center;
+    padding:0px
+}
+td
+{
+    padding:0px;
+}
+input
+{
+    border:1px solid #cccccc
+}
+.specialCell
+{
+    background:#cccccc;
+}
+.firstColumn
+{
+    width:30px;
+}
+.editing
+{
+    background-color:#ffffee;
+    border-style:solid;
+    border-color:gray;
+}
+.error
+{
+    color:black;
+    background-color:#FFA70F
+}
+.formula
+{
+    background-color:#82B1FF
+}
