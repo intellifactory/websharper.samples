@@ -10,9 +10,6 @@
     <AssemblyName>WebExcel</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <Name>WebExcel</Name>
-    <TargetFrameworkProfile />
-    <WebSharperVersion>1.0</WebSharperVersion>
-    <WebSharperPath>$(ProgramFiles)/IntelliFactory/WebSharper/$(WebSharperVersion)/</WebSharperPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,26 +28,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" Condition="!Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
-  <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.FSharp.targets" />
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Main.fs" />
     <EmbeddedResource Include="Styles.css" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="IntelliFactory.WebSharper">
-      <HintPath>$(WebSharperPath)/IntelliFactory.WebSharper.dll</HintPath>
-      <CopyLocal>true</CopyLocal>
-    </Reference>
-    <Reference Include="IntelliFactory.WebSharper.Formlet">
-      <HintPath>$(WebSharperPath)/IntelliFactory.WebSharper.Formlet.dll</HintPath>
-      <CopyLocal>true</CopyLocal>
-    </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="FSharp.Core" />
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />

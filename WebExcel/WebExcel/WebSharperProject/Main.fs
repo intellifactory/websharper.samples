@@ -3,25 +3,20 @@
 open IntelliFactory.WebSharper
 
 module Styles =
+    [<Sealed>]
     type Table() =
-        interface IResource with
-            member this.Render(r, w) =
-                let u = r.GetWebResourceUrl(typeof<Table>, "Styles.css")
-                Resource.RenderCss u w
+        inherit Resources.BaseResource("Styles.css")
 
 [<System.Web.UI.WebResource("Styles.css", "text/css")>]
 do()
 
-[<JavaScriptType>]
 type EvalResult = Ok of obj | Error of string
 
 module Ast =
     open System.Collections.Generic
 
-    [<JavaScriptType>]
     type Context = string -> EvalResult option
     
-    [<JavaScriptType>]
     type Expr = 
         | Value of obj
         | Ref of string
@@ -159,15 +154,18 @@ module Operations =
 module Parser = 
 
     open Ast
+    open IntelliFactory.WebSharper.EcmaScript
 
     [<JavaScript>]
     let some v (rest : string) = Some(v, rest)
 
     [<JavaScript>]
     let capture pattern text = 
-        let regex = JRegExp("^(" + pattern + ")(.*)")
+        let regex = RegExp("^(" + pattern + ")(.*)")
         if regex.Test(text)
-        then regex.Exec(text)  |> Option.bind (fun v -> some v.[1] v.[2])
+        then 
+            let v = regex.Exec(text)
+            some v.[1] v.[2]
         else None
 
     [<JavaScript>]
@@ -285,7 +283,7 @@ module Model =
     let private rowsSet = Set.ofSeq rows
     
     [<JavaScript>]
-    let cols = [int 'A'..int 'H'] |> List.map (char >> toString)
+    let cols = [int 'A'..int 'H'] |> List.map (System.Char.ConvertFromUtf32)
     [<JavaScript>]
     let colSet = Set.ofSeq cols
 
@@ -298,12 +296,10 @@ module Model =
             let row = s.Substring(1)
             rowsSet.Contains row && colSet.Contains col
 
-    [<JavaScriptType>]
     type ICellDataStorage =
         abstract member GetValue : string -> EvalResult option
         abstract member SetValue : cell : string * value : EvalResult -> unit
 
-    [<JavaScriptType>]
     type CellDataStorage [<JavaScript>] () = 
         let results = new System.Collections.Generic.Dictionary<string, EvalResult>()
 
@@ -338,7 +334,6 @@ module Model =
             [<JavaScript>]
             member this.SetValue(cell, value) = setValue cell value
 
-    [<JavaScriptType>]
     type TopoSort [<JavaScript>] () = 
         let map = new System.Collections.Generic.Dictionary<string, Set<_>>()
         
@@ -380,7 +375,6 @@ module Model =
 
             impl ([], Set.empty) s |> fst     
 
-    [<JavaScriptType>]
     type CellFormulaStorage [<JavaScript>](dataStorage : ICellDataStorage) = 
         let map = new System.Collections.Generic.Dictionary<string, Ast.Expr>()
         let toposort = new TopoSort()
@@ -450,7 +444,6 @@ module UI =
     open System
     open System.Collections.Generic
 
-    [<JavaScriptType>]
     type Presenter [<JavaScript>] () = 
 
         let dataStorage = new Model.CellDataStorage()
@@ -459,6 +452,9 @@ module UI =
         let userInput = new Dictionary<_, _>()
         
         let map = new Dictionary<_, _>()
+
+        [<Inline "window.alert($msg)">]
+        let alert (msg : string) = ()
 
         [<JavaScript>]
         let onFocus (cell : Element) =
@@ -501,37 +497,35 @@ module UI =
                         el.RemoveAttribute("title")
                         el.Value <- ""
             with
-                e ->
-                Window.Alert(e.ToString())
+                e -> alert(e.ToString())
 
         [<JavaScript>]
         member this.CreateCell(name) = 
             let cell = 
                 Input [Id name] 
-                |>! OnFocus(fun e _ -> onFocus e)
-                |>! OnBlur(fun e _ -> onBlur e)
+                |>! OnFocus(fun e -> onFocus e)
+                |>! OnBlur(fun e -> onBlur e)
             map.Add(name, cell)
             cell
 
     [<JavaScript>]
-    let main =
+    let main () =
 
         let presenter = new Presenter()
 
-        Table [] -< [
+        Table [
             yield TR [
-                yield TD [Class "specialCell firstColumn"]; 
-                for col in Model.cols do yield TD [Class "specialCell"] -< [Text col]]
+                yield TD [Attr.Class "specialCell firstColumn"]; 
+                for col in Model.cols do yield TD [Attr.Class "specialCell"] -< [Text col]]
             for row in Model.rows do
                 yield TR [ 
-                    yield TD [Class "specialCell firstColumn"] -< [ Text row ]; 
+                    yield TD [Attr.Class "specialCell firstColumn"] -< [ Text row ]; 
                     for col in Model.cols do yield TD [presenter.CreateCell (col + row)]
                     ]
         ]
 
-[<JavaScriptType>]
 type ExcelControl() = 
     inherit Web.Control()
 
     [<JavaScript>]
-    override this.Body = UI.main
+    override this.Body = upcast UI.main ()
