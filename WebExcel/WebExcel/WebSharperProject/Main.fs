@@ -283,7 +283,7 @@ module Model =
     let private rowsSet = Set.ofSeq rows
     
     [<JavaScript>]
-    let cols = [int 'A'..int 'H'] |> List.map (System.Char.ConvertFromUtf32)
+    let cols = [int 'A'..int 'H'] |> List.map Char.ConvertFromUtf32
     [<JavaScript>]
     let colSet = Set.ofSeq cols
 
@@ -292,7 +292,7 @@ module Model =
     let private isReference (s : string) = 
         if System.String.IsNullOrEmpty s || s.Length < 2 then false
         else
-            let col = toString s.[0]
+            let col = Char.ConvertFromUtf32(int s.[0])
             let row = s.Substring(1)
             rowsSet.Contains row && colSet.Contains col
 
@@ -307,7 +307,7 @@ module Model =
         let setValue cell value = results.[cell] <- value 
 
         [<JavaScript>]
-        member this.SetValue(cell, value) =        
+        member this.SetCellValue(cell, value) =        
             if System.String.IsNullOrEmpty value
             then
                 this.DeleteValue(cell)
@@ -323,14 +323,14 @@ module Model =
                 results.Remove cell |> ignore
 
         [<JavaScript>]
-        member this.GetValue(cell) = 
+        member this.GetCellValue(cell) = 
             if results.ContainsKey cell 
             then results.[cell] |> Some
             else None
 
         interface ICellDataStorage with
             [<JavaScript>]
-            member this.GetValue(cell) = this.GetValue(cell)
+            member this.GetValue(cell) = this.GetCellValue(cell)
             [<JavaScript>]
             member this.SetValue(cell, value) = setValue cell value
 
@@ -475,14 +475,14 @@ module UI =
                     then
                         formulaStorage.SetFormula(cell.Id, cell.Value)
                     else    
-                        let ok = dataStorage.SetValue(cell.Id, cell.Value)
+                        let ok = dataStorage.SetCellValue(cell.Id, cell.Value)
                         if ok 
                         then formulaStorage.Evaluate(cell.Id)
                         else [cell.Id]
 
                 for dep in dependencies do
                     let el : Element = map.[dep]
-                    match dataStorage.GetValue(el.Id) with
+                    match dataStorage.GetCellValue(el.Id) with
                     | Some (Ok v) ->
                         el.RemoveAttribute("title")
                         if formulaStorage.HasFormula el.Id then
