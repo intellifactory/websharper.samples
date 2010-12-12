@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Template</title>
+  </head>
+  <body>
+	<div>
+    <table>
+      <tr>
+        <td>
+          <a href="Default.aspx">Back</a>
+        </td>
+      </tr>
+      <tr>
+        <td>${Caption}</td>
+      </tr>
+      <tr>
+        <td>${Content}</td>
+      </tr>
+    </table>
+  </div>
+  </body>
+</html>
