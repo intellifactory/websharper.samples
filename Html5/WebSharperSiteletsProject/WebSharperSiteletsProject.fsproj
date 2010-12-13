@@ -45,7 +45,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
       <Name>WebSharperTemplates</Name>
-      <Project>{c299de8e-a05d-4096-9a54-2ccbda2bb8d6}</Project>
+      <Project>{7d28c107-fa7f-4daa-bffb-67b458e760c1}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
