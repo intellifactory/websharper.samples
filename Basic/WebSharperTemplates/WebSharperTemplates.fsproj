@@ -37,6 +37,5 @@
   <ItemGroup>
     <Compile Include="SamplePage.template.xml" />
   </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.FSharp.targets" />
   <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.Build.targets" />
 </Project>

@@ -52,6 +52,5 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.FSharp.targets" />
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.Build.targets" />
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
 </Project>
