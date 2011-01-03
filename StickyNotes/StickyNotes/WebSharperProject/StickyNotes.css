@@ -1,0 +1,44 @@
+﻿.note
+{
+    position:absolute;
+    height:250px;
+    width:200px;
+    border:thin solid #999000;
+    -moz-box-shadow: 2px 2px 2px #888000;
+}
+.header
+{
+    position:absolute;
+    width:200px;
+    height:30px;
+    background-color:black;
+    color:white;
+    font-size:small;
+    font-style:italic;
+    cursor:default;
+
+}
+.edit
+{
+    position:absolute;
+    width:200px;
+    height:220px;
+    top:30px;
+    background-color: #FFF046;
+    font-family:Lucida Handwriting;
+    font-size:medium;
+    overflow:auto;    
+}
+.closebutton
+{
+    background-image:url(<%= WebResource("remove.png") %>);
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:30px;
+    height:30px;
+}
+.closebutton:active
+{
+    background-image:url(<%= WebResource("remove_active.png") %>);
+}
