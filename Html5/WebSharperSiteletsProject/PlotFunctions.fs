@@ -40,7 +40,7 @@ module PlotFunctions =
 
         [<JavaScript>]
         let NewCanvas width height =
-            let element = H.NewTag "Canvas" []
+            let element = Tags.NewTag "Canvas" []
             let canvas  = As<CanvasElement> element.Dom
             canvas.Width  <- width
             canvas.Height <- height

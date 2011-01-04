@@ -23,7 +23,7 @@ open IntelliFactory.WebSharper.Html5
 module CanvasAnimation =
     [<JavaScript>]
     let AnimatedCanvas draw width height caption =
-        let element = H.NewTag "Canvas" []
+        let element = Tags.NewTag "Canvas" []
         let canvas  = As<CanvasElement> element.Dom
         canvas.Width  <- width
         canvas.Height <- height

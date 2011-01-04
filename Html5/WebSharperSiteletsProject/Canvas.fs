@@ -136,7 +136,7 @@ module Canvas =
             ctx.Fill()
 
         let Example (draw: CanvasRenderingContext2D -> unit) width height caption =
-            let element = H.NewTag "canvas" []
+            let element = Tags.NewTag "canvas" []
             let canvas  = As<CanvasElement> element.Dom
             canvas.Height <- height
             canvas.Width  <- width
