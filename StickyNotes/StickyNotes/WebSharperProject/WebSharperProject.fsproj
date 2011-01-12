@@ -37,8 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.JQueryUI">
-      <HintPath>..\bin\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
+      <HintPath>..\..\bin\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
     </Reference>
+    <Reference Include="IntelliFactory.WebSharper.JQueryUI" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Web" />

@@ -1,0 +1,2 @@
+To run StickyNotes application you'll need to put JQueryUI extension (dll/dep/js files) to bin folder. 
+The latest version of JQueryUI can be downloaded from the WebSharper official site (http://websharper.com/Downloads.aspx)
