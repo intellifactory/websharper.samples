@@ -8,7 +8,7 @@
     <table>
       <tr>
         <td>
-          <a href="Default.aspx">Back</a>
+          ${Back}
         </td>
       </tr>
       <tr>

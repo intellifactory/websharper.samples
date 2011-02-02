@@ -28,13 +28,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="SamplePage.template.xml" />
+    <Compile Include="SamplePage.fs" />
     <Compile Include="Info.fs" />
     <Compile Include="Autocomplete.fs" />
     <Compile Include="Calculations.fs" />
@@ -46,11 +43,9 @@
     <Compile Include="Site.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
-      <Name>WebSharperTemplates</Name>
-      <Project>{f14f38af-22f1-4733-9913-c419efc5247f}</Project>
-      <Private>True</Private>
-    </ProjectReference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
 </Project>

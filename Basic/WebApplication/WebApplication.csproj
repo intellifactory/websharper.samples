@@ -42,7 +42,6 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -57,10 +56,6 @@
     <ProjectReference Include="..\WebSharperSiteletsProject\WebSharperSiteletsProject.fsproj">
       <Project>{72847921-18D7-43AC-821F-1A167019617A}</Project>
       <Name>SampleWebsite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
-      <Project>{C299DE8E-A05D-4096-9A54-2CCBDA2BB8D6}</Project>
-      <Name>WebSharperTemplates</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

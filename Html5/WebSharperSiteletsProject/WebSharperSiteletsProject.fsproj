@@ -28,13 +28,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="SamplePage.template.xml" />
+    <Compile Include="SamplePage.fs" />
     <Compile Include="Canvas.fs" />
     <Compile Include="CanvasAnimation.fs" />
     <Compile Include="DataStorage.fs" />
@@ -43,11 +40,9 @@
     <Compile Include="Site.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
-      <Name>WebSharperTemplates</Name>
-      <Project>{7d28c107-fa7f-4daa-bffb-67b458e760c1}</Project>
-      <Private>True</Private>
-    </ProjectReference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
 </Project>
