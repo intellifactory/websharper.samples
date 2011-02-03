@@ -13,7 +13,7 @@ open IntelliFactory.WebSharper.Html
 module DataStorage =
 
     [<JavaScriptAttribute>]
-    let Main () = 
+    let Main () =
         Div [
             H1 [Text "LocalStorage Test"]
         ]
@@ -23,14 +23,14 @@ module DataStorage =
             let intReference = storage.GetItem(key)
             if intReference = null || intReference = JavaScript.Undefined then
                 storage.SetItem(key, "0")
-            else 
+            else
                 let oldValue = int (intReference)
                 storage.SetItem(key, (oldValue + 1).ToString())
-            elem.Html <- elem.Html 
-                         + "<h2>localStorage is now: (" 
+            elem.Html <- elem.Html
+                         + "<h2>localStorage is now: ("
                          + storage.GetItem(key) + ")</h2>"
         )
-        
+
 type DataStorageViewer() =
     inherit Web.Control()
     [<JavaScript>]

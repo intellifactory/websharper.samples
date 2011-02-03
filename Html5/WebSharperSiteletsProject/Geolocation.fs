@@ -23,7 +23,7 @@ module Geolocation =
         )
 
     [<JavaScriptAttribute>]
-    let Main () = 
+    let Main () =
         Div []
         |>! OnAfterRender (fun elem ->
             async {
@@ -31,7 +31,7 @@ module Geolocation =
                 let coords = position.Coords
                 let coordsText = (coords.Latitude, coords.Longitude).ToString()
                 elem.Html <- elem.Html + "<h2>Your location is: (" + coordsText + ")</h2>"
-                
+
             }
             |> Async.Start |> ignore
         )

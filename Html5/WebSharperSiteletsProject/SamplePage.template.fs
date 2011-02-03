@@ -5,7 +5,7 @@
 //    Changes to this file will be lost is the code is regenerated.
 // </generated>
 //------------------------------------------------------------------------
-namespace Website.Templates.Templates
+namespace WebSharperSiteletsProject.Templates
 
 module SamplePage =
  open System.Web.UI
