@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>WebSharperProject</RootNamespace>
     <AssemblyName>StickyNotes</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Name>WebSharperProject</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,11 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.JQueryUI">
-      <HintPath>..\..\bin\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
+      <HintPath>..\..\..\Assemblies\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
     </Reference>
-    <Reference Include="IntelliFactory.WebSharper.JQueryUI" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
