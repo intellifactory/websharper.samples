@@ -28,9 +28,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
+  <ItemGroup>
+    <Content Include="SamplePage.template.xml" />
+    <Compile Include="SamplePage.template.fs" />
+    <Compile Include="GoogleMaps.fs" />
+    <Compile Include="Site.fs" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.Google.Maps">
-      <HintPath>..\bin\IntelliFactory.WebSharper.Google.Maps.dll</HintPath>
+      <HintPath>..\..\..\Assemblies\IntelliFactory.WebSharper.Google.Maps.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -38,16 +45,4 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="GoogleMaps.fs" />
-    <Compile Include="Site.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
-      <Name>WebSharperTemplates</Name>
-      <Project>{ba74ac9a-ab36-4434-ae26-2f1c6697dd6c}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
 </Project>

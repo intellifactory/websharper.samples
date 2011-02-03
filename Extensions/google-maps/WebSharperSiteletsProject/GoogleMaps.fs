@@ -6,7 +6,7 @@
     events, and street views.</p>
     <h2>Source Code Explained</h2>
 ]*)
-namespace Samples
+namespace WebSharperSiteletsProject
 
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.Html
