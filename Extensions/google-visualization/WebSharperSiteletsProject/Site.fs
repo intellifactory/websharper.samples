@@ -8,39 +8,21 @@ open IntelliFactory.Html
 open IntelliFactory.WebSharper.Sitelets
 open IntelliFactory.WebSharper
 
-type Marker = class end
+module Site =
+    type Action = | Index
 
-type SamplesList() = 
-    static let samples = 
-            typeof<Marker>.Assembly.GetTypes() 
-            |> Seq.filter (fun t -> typeof<Web.Control>.IsAssignableFrom t)
-            |> Seq.map (fun t -> 
-                let name = t.Name.Substring(0, t.Name.Length - "Viewer".Length)
-                name, t
-                )
-            |> List.ofSeq
-    static member GetSampleNames() = samples |> Seq.map fst |> Seq.toArray
-    static member internal GetSamples() = samples
-
-
-module Site = 
-    let pages () =
-        SamplesList.GetSamples()
-            |> List.map (fun (name, t) ->
-                let el = Activator.CreateInstance(t) :?> Web.Control
-                Website.Templates.SamplePage.SamplePage name name <|
-                    {
-                        Caption = fun _ -> Div [Text name]
-                        Content = fun _ -> Div [el]
-                    }
-                )
-        
-    
+    let Main =
+        Templates.SamplePage.SamplePage (Some "Google Visualization") <|
+            {
+                Caption = fun _ -> [Div [Text "Google Visualization"]]
+                Content = fun _ -> [Div [new GoogleVisualizationViewer()]]
+            }
+        |> Sitelet.Content "/" Index
 
 type Website() =
-    interface IWebsite with
-        member this.Pages = Site.pages ()           
-
+    interface IWebsite<Site.Action> with
+        member this.Sitelet = Site.Main
+        member this.Actions = [Site.Index]
 
 [<assembly: WebsiteAttribute(typeof<Website>)>]
 do ()

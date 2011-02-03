@@ -7,11 +7,6 @@
 	<div>
     <table>
       <tr>
-        <td>
-          <a href="Default.aspx">Back</a>
-        </td>
-      </tr>
-      <tr>
         <td>${Caption}</td>
       </tr>
       <tr>

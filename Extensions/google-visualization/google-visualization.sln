@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplic
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharperSiteletsProject", "WebSharperSiteletsProject\WebSharperSiteletsProject.fsproj", "{CDB09FBC-C904-492C-8A87-CEF4EE9C0400}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharperTemplates", "WebSharperTemplates\WebSharperTemplates.fsproj", "{16DEC7B8-55A4-429A-B3B2-CB14282CEAAB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +19,6 @@ Global
 		{CDB09FBC-C904-492C-8A87-CEF4EE9C0400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDB09FBC-C904-492C-8A87-CEF4EE9C0400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDB09FBC-C904-492C-8A87-CEF4EE9C0400}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16DEC7B8-55A4-429A-B3B2-CB14282CEAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16DEC7B8-55A4-429A-B3B2-CB14282CEAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16DEC7B8-55A4-429A-B3B2-CB14282CEAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16DEC7B8-55A4-429A-B3B2-CB14282CEAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

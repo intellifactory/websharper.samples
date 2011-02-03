@@ -28,9 +28,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
+  <ItemGroup>
+    <Content Include="SamplePage.template.xml" />
+    <Compile Include="SamplePage.template.fs" />
+    <Compile Include="GoogleVisualization.fs" />
+    <Compile Include="Site.fs" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.Google.Visualization">
-      <HintPath>..\bin\IntelliFactory.WebSharper.Google.Visualization.dll</HintPath>
+      <HintPath>..\..\..\Assemblies\IntelliFactory.WebSharper.Google.Visualization.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -38,16 +45,4 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Site.fs" />
-    <Compile Include="GoogleVisualization.fs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebSharperTemplates\WebSharperTemplates.fsproj">
-      <Name>WebSharperTemplates</Name>
-      <Project>{16dec7b8-55a4-429a-b3b2-cb14282ceaab}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
 </Project>
