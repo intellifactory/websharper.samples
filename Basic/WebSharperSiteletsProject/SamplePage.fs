@@ -12,12 +12,12 @@ module SamplePage =
  open IntelliFactory.Html
  open IntelliFactory.WebSharper
  open IntelliFactory.WebSharper.Sitelets
- 
+
  type SamplePageArgs<'Action> =
   {Content: Context<'Action> -> list<Element<Web.Control>>
    Caption: Context<'Action> -> list<Element<Web.Control>>
    Back: Context<'Action> -> list<Element<Web.Control>>}
- 
+
  let SamplePageBody context (args: SamplePageArgs<'Action>) =
   [Div [
     Table [
@@ -25,7 +25,7 @@ module SamplePage =
       TD [
        ] -< [ Text "
           " ] -< [
-       ] -< args.Back context -< 
+       ] -< args.Back context -<
        [ Text "
         " ] -< [
       ]
@@ -33,24 +33,23 @@ module SamplePage =
      TR [
       TD [
        ] -< [ Text "" ] -< [
-       ] -< args.Caption context -< 
+       ] -< args.Caption context -<
        [ Text "" ] -< [
       ]
      ]
      TR [
       TD [
        ] -< [ Text "" ] -< [
-       ] -< args.Content context -< 
+       ] -< args.Content context -<
        [ Text "" ] -< [
       ]
      ]
     ]
    ]]
- 
+
  let SamplePage title (args: SamplePageArgs<'Action>) =
   PageContent <| fun context ->
    {Sitelets.Page.Default with
       Title = title
       Head =  []
       Body = SamplePageBody context args}
- 
