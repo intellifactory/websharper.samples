@@ -29,15 +29,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
-  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.FSharp.targets" />
+  <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
+    <Compile Include="Extensions.fs" />
+    <Compile Include="Server.fs" />
     <Compile Include="Main.fs" />
     <EmbeddedResource Include="Styles.css" />
+    <Compile Include="Site.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="IntelliFactory.WebSharper.JQueryUI">
+      <HintPath>..\bin\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="System" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>

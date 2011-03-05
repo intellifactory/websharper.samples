@@ -2,13 +2,15 @@
 {
     border-collapse:collapse;
     border:1px solid black;
-    text-align:center;
     padding:0px
 }
+
 td
 {
-    padding:0px;
+    padding: 0px;
+    font-size: 14px;
 }
+
 input
 {
     border:1px solid #cccccc
@@ -35,4 +37,8 @@ input
 .formula
 {
     background-color:#82B1FF
+}
+.toolbar
+{
+    text-align:left;
 }
