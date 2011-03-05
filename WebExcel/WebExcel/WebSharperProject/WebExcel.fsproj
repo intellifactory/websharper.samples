@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>WebSharperProject</RootNamespace>
     <AssemblyName>WebExcel</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <Name>WebExcel</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
