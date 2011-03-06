@@ -505,7 +505,11 @@ module UI =
 
         [<JavaScript>]
         let onFocus (cell : Element) =
+            cell.RemoveClass("error")
+            cell.RemoveClass("formula")
+
             cell.AddClass("editing")
+
             cell.Value <- if userInput.ContainsKey cell.Id then userInput.[cell.Id] else ""
 
         [<JavaScript>]
@@ -514,8 +518,6 @@ module UI =
             userInput.[cell.Id] <- cell.Value
             formulaStorage.DeleteFormula(cell.Id)
 
-            cell.RemoveClass("error")
-            cell.RemoveClass("formula")
             try
                 let dependencies =
                     if cell.Value.StartsWith("=")
@@ -552,9 +554,12 @@ module UI =
                 Input [Id name]
                 |>! OnFocus(fun e -> onFocus e)
                 |>! OnBlur(fun e -> onBlur e)
-                |>! OnKeyPress(fun e key ->
-                    if key.CharacterCode = 13 then onBlur e
-                    )
+
+            JQuery.JQuery.Of(cell.Dom).Keypress(
+                fun o evt -> 
+                    if evt.Which = 13 then JQuery.JQuery.Of(cell.Dom).Blur().Ignore
+                ).Ignore
+
             map.Add(name, cell)
             cell
 
