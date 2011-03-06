@@ -31,6 +31,8 @@
   </PropertyGroup>
   <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
+    <Compile Include="MasterPage.template.xml" />
+    <Compile Include="MasterPage.template.fs" />
     <Compile Include="Extensions.fs" />
     <Compile Include="Server.fs" />
     <Compile Include="Main.fs" />

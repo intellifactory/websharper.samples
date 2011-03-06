@@ -26,12 +26,9 @@ module Content =
 
 module Site =
     let private mainPage = 
-        PageContent <| fun _ ->
+        WebSharperProject.Templates.MasterPage.MasterPage (Some "WebExcel") <|
             {
-                Page.Default
-                with
-                    Title = Some "WebExcel"
-                    Body = [ Div [ new ExcelControl() ] ]
+                Excel = fun ctx -> [ Div [ new ExcelControl() ] ]
             }
 
     let private download () = 

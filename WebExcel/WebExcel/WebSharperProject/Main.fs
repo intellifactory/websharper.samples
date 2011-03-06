@@ -50,7 +50,7 @@ module Ast =
     let getReferences e =
         let rec impl (acc : Set<_>) = function
             | Value _ -> acc
-            | Ref v -> acc.Add v
+            | Ref v -> acc.Add (v)
             | Operation(_, l) -> (acc, l) ||> Seq.fold impl
         impl Set.empty e
 
@@ -249,7 +249,7 @@ module Parser =
         | IDENTIFIER(id, r) ->
             match r with
             | LPAREN (ArgList (args, RPAREN r)) -> operation (Operations.Get id) args r
-            | _ -> some(Ref id) r
+            | _ -> some(Ref (id.ToUpper())) r
         | NUMBER (v, r) -> some (Value (System.Double.Parse v)) r
         | LPAREN(Logical (e, RPAREN r)) -> some e r
         | _ -> None
@@ -313,13 +313,13 @@ module Model =
         else lines |> Seq.reduce(fun a b -> a + delimiter + b)
 
     [<JavaScript>]
-    let rows = [1..20] |> List.map toString
+    let rows = [1..10] |> List.map toString
 
     [<JavaScript>]
     let private rowsSet = Set.ofSeq rows
 
     [<JavaScript>]
-    let cols = [int 'A'..int 'H'] |> List.map Char.ConvertFromUtf32
+    let cols = [int 'A'..int 'F'] |> List.map Char.ConvertFromUtf32
 
     [<JavaScript>]
     let colSet = Set.ofSeq cols
@@ -342,15 +342,15 @@ module Model =
         [<JavaScript>]
         let setValue cell value = results.[cell] <- value
 
-        [<JavaScript>]
-        member this.GetFilledData() = 
-            results
-                |> Seq.choose (fun kv ->
-                    match kv.Value with
-                    | Ok v -> Some {Cell = kv.Key; Value = string v} 
-                    | Error _ -> None 
-                    )
-                |> Seq.toArray
+//        [<JavaScript>]
+//        member this.GetFilledData() = 
+//            results
+//                |> Seq.choose (fun kv ->
+//                    match kv.Value with
+//                    | Ok v -> Some {Cell = kv.Key; Value = string v} 
+//                    | Error _ -> None 
+//                    )
+//                |> Seq.toArray
 
         [<JavaScript>]
         member this.SetCellValue(cell, value) =
@@ -552,16 +552,11 @@ module UI =
                 Input [Id name]
                 |>! OnFocus(fun e -> onFocus e)
                 |>! OnBlur(fun e -> onBlur e)
+                |>! OnKeyPress(fun e key ->
+                    if key.CharacterCode = 13 then onBlur e
+                    )
             map.Add(name, cell)
             cell
-
-        [<JavaScript>]
-        member this.AddSaveWorksheetButton(panel : Element) = 
-            let button = JQueryUI.Button.New "Save worksheet"
-            panel.Append button
-            button.OnClick <| fun _ ->
-                let data = dataStorage.GetFilledData()
-                Server.Save Model.cols.Length Model.rows.Length data |> ignore
 
         [<JavaScript>]
         member this.AddNewFunctionWizardButton(panel : Element) =
@@ -631,7 +626,6 @@ module UI =
         Table [
             let toolbar = Div [Attr.Class "toolbar"] -< [] 
             presenter.AddNewFunctionWizardButton toolbar
-            // presenter.AddSaveWorksheetButton toolbar
             yield TR [TD [ColSpan (string Model.colSet.Count)] -< [toolbar]]
             yield TR [
                 yield TD [Attr.Class "specialCell firstColumn"]
