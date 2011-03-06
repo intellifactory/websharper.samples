@@ -23,7 +23,7 @@ module MasterPage =
      Div [Class "left"] -< [
       Div [Id "Title"] -< [
        ] -< [ Text
-        "Welcome to WebExcel application - simple spreadsheet working entirely in browser." ]
+        "Welcome to WebExcel - a simple WebSharper spreadsheet application running entirely in your browser." ]
         -< [
       ]
       Div [
@@ -40,13 +40,13 @@ module MasterPage =
        LI [
         ] -< [ Text
          "
-              Formulas starts from '=' sign
+              Formulas start with '=' sign
             " ] -< [
        ]
        LI [
         ] -< [ Text
          "
-              Cells are referenced by their names (composed from column and row) i.e. A1, B2
+              Cells are referenced by their names (composed from column and row) for instance A1, B2
             " ]
          -< [
        ]
@@ -67,6 +67,8 @@ module MasterPage =
         Span [Class "function-name"] -< [
          ] -< [ Text "IF" ] -< [
         ]
+        ] -< [ Text ".
+            " ] -< [
        ]
       ]
      ]

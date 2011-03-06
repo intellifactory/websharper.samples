@@ -11,23 +11,23 @@
       </div>
       <div class="content">
         <div class="left">
-          <div id="Title">Welcome to WebExcel application - simple spreadsheet working entirely in browser.</div>
+          <div id="Title">Welcome to WebExcel - a simple WebSharper spreadsheet application running entirely in your browser.</div>
           <div>Notes:</div>
           <ul>
             <li>
               Possible cell values are numbers and formulas
             </li>
             <li>
-              Formulas starts from '=' sign
+              Formulas start with '=' sign
             </li>
             <li>
-              Cells are referenced by their names (composed from column and row) i.e. A1, B2
+              Cells are referenced by their names (composed from column and row) for instance A1, B2
             </li>
             <li>
               Formulas can contain basic arithmetic operations (+, -, *, /), logical operations (&gt;, &lt;, =, &lt;&gt;, &gt;=, &lt;=) and functions
             </li>
             <li>
-              Predefined functions are: <span class="function-name">AVERAGE</span> and <span class="function-name">IF</span>
+              Predefined functions are: <span class="function-name">AVERAGE</span> and <span class="function-name">IF</span>.
             </li>
           </ul>
         </div>

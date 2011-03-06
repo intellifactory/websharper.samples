@@ -14,12 +14,12 @@
 .left 
 {
     float: left;
-    width: 35%;
+    width: 50%;
 }
 .right 
 {
     float: right;
-    width: 65%;
+    width: 45%;
 }
 .function-name
 {
