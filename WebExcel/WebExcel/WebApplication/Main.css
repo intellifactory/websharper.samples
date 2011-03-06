@@ -1,0 +1,33 @@
+﻿.header
+{
+    height: 120px;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.content
+{
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.left 
+{
+    float: left;
+    width: 35%;
+}
+.right 
+{
+    float: right;
+    width: 65%;
+}
+.function-name
+{
+    font-style:italic;
+    font-size:110%;
+}
+#Title
+{
+    font-size:130%;
+    font-style:italic;
+}
