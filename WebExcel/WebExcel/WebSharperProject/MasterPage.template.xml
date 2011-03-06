@@ -21,13 +21,24 @@
               Formulas start with '=' sign
             </li>
             <li>
-              Cells are referenced by their names (composed from column and row) for instance A1, B2
+              Cells are referenced by their names (composed from column and row), for instance A1, B2
             </li>
             <li>
-              Formulas can contain basic arithmetic operations (+, -, *, /), logical operations (&gt;, &lt;, =, &lt;&gt;, &gt;=, &lt;=) and functions
+              Formulas can contain basic arithmetic operations (+, -, *, /), logical operations (&gt;, &lt;, =, &lt;&gt;, &gt;=, &lt;=), and functions
             </li>
             <li>
-              Predefined functions are: <span class="function-name">AVERAGE</span> and <span class="function-name">IF</span>.
+              Predefined functions are: <span class="function-name">AVERAGE</span> and <span class="function-name">IF</span>. 
+              <div class="code">=AVERAGE(A1, B1, 10)</div>
+              <div class="code">=IF(A1 > 5, 1, C2)</div>
+            </li>
+            <li>
+              You can add custom functions defined in JavaScript. Click on 'Add function' button, enter function name and definition and press 'OK'. Function definition is a JavaScript function that returns a numeric value.
+              <pre class="code">
+function (a, b)
+{
+  return a + b;
+}
+              </pre>
             </li>
           </ul>
         </div>

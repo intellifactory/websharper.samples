@@ -46,14 +46,14 @@ module MasterPage =
        LI [
         ] -< [ Text
          "
-              Cells are referenced by their names (composed from column and row) for instance A1, B2
+              Cells are referenced by their names (composed from column and row), for instance A1, B2
             " ]
          -< [
        ]
        LI [
         ] -< [ Text
          "
-              Formulas can contain basic arithmetic operations (+, -, *, /), logical operations (>, <, =, <>, >=, <=) and functions
+              Formulas can contain basic arithmetic operations (+, -, *, /), logical operations (>, <, =, <>, >=, <=), and functions
             " ]
          -< [
        ]
@@ -67,8 +67,30 @@ module MasterPage =
         Span [Class "function-name"] -< [
          ] -< [ Text "IF" ] -< [
         ]
-        ] -< [ Text ".
-            " ] -< [
+        ] -< [ Text ". 
+              " ] -< [
+        Div [Class "code"] -< [
+         ] -< [ Text "=AVERAGE(A1, B1, 10)" ] -< [
+        ]
+        Div [Class "code"] -< [
+         ] -< [ Text "=IF(A1 > 5, 1, C2)" ] -< [
+        ]
+       ]
+       LI [
+        ] -< [ Text
+         "
+              You can add custom functions defined in JavaScript. Click on 'Add function' button, enter function name and definition and press 'OK'. Function definition is a JavaScript function that returns a numeric value.
+              " ]
+         -< [
+        Pre [Class "code"] -< [
+         ] -< [ Text
+          "
+function (a, b)
+{
+  return a + b;
+}
+              " ] -< [
+        ]
        ]
       ]
      ]
