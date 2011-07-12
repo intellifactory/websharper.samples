@@ -31,7 +31,7 @@ module GoogleMaps =
     [<JavaScript>]
     let SimpleMap() =
         Sample <| fun (map: Map) ->
-            let latLng = new LatLng(-34.397, 150.644)
+            let latLng = new LatLng(37.4419, -122.1419)
             let options = new MapOptions(8, latLng, MapTypeId.ROADMAP)
             map.SetOptions options
 

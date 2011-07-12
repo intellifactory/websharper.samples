@@ -161,6 +161,4 @@ type Body() =
     inherit Web.Control()
     [<JavaScript>]
     override this.Body = 
-        Div [Text "hello"]
-        :> _
-        // Notes.main () :> _
+        Notes.main () :> _
