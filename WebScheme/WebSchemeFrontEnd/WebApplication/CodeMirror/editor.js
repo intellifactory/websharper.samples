@@ -351,7 +351,7 @@ var Editor = (function(){
           }
           node = next;
           offset = 0;
-        }        
+        }
       }
     },
 
@@ -959,7 +959,7 @@ var Editor = (function(){
         else if (Editor.Parser.firstIndentation)
           newIndent = Editor.Parser.firstIndentation(nextChars, curIndent, direction);
       }
-      
+
       var indentDiff = newIndent - curIndent;
 
       // If there is too much, this is just a matter of shrinking a span.
@@ -1410,7 +1410,7 @@ var Editor = (function(){
       }
       // Create a part corresponding to a given token.
       function tokenPart(token){
-        var part = makePartSpan(token.value);     
+        var part = makePartSpan(token.value);
         part.className = token.style;
         return part;
       }
@@ -1488,7 +1488,7 @@ var Editor = (function(){
               select.snapshotMove(old.firstChild, part && (part.firstChild || part), 0);
             }
           }
-          
+
           return part;
         }
       };

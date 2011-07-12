@@ -39,7 +39,7 @@ var tokenizeScheme = (function() {
 	}
 	return false;
     }
-    
+
 
     // Advance the stream until endline.
     var scanUntilEndline = function(source, end) {
@@ -48,17 +48,17 @@ var tokenizeScheme = (function() {
 	}
     }
 
-    
+
     // Some helper regexps
     var isHexDigit = /[0-9A-Fa-f]/;
-    
+
 
     var whitespaceChar = new RegExp("[\\s\\u00a0]");
-    
-    var isDelimiterChar = 
+
+    var isDelimiterChar =
 	new RegExp("[\\s\\\(\\\)\\\[\\\]\\\{\\\}\\\"\\\,\\\'\\\`\\\;]");
 
-    var isNotDelimiterChar = 
+    var isNotDelimiterChar =
 	new RegExp("[^\\s\\\(\\\)\\\[\\\]\\\{\\\}\\\"\\\,\\\'\\\`\\\;]");
 
 
@@ -73,7 +73,7 @@ var tokenizeScheme = (function() {
 	    /^((?:\#[ei])?[+-]nan.0)$/,
 	new RegExp("^((?:\\#[ei])?[+\\-]?" + numberHeader + "$)"),
 	new RegExp("^0[xX][0-9A-Fa-f]+$")];
-   
+
 
     // looksLikeNumber: string -> boolean
     // Returns true if string s looks like a number.
@@ -164,7 +164,7 @@ var tokenizeScheme = (function() {
 	    if (source.equals(";")) {
 		source.next();
 		text = source.get();
-		return {type: text, 
+		return {type: text,
 			style:"scheme-symbol",
 			content: text};
 	    } else {
@@ -247,7 +247,7 @@ var tokenizeScheme = (function() {
 		    });
 		}
 		var result = this.take(type);
-		return result;		    
+		return result;		
 	    }
 	};
 	return tokenizer;

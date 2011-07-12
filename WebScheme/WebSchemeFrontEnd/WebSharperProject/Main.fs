@@ -3,7 +3,7 @@
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.Html
 
-module ElementExtensions = 
+module ElementExtensions =
     type IntelliFactory.WebSharper.Html.Element with
         [<JavaScript>]
         member this.JQuery = JQuery.JQuery.Of(this.Dom)
@@ -11,31 +11,31 @@ module ElementExtensions =
 open WebScheme
 open ElementExtensions
 
-type WebSchemeUI() = 
+type WebSchemeUI() =
     inherit Web.Control()
 
     [<JavaScript>]
     let rec toString = function
-        | Scheme.Bool v -> v.ToString() 
+        | Scheme.Bool v -> v.ToString()
         | Scheme.Int v -> v.ToString()
         | Scheme.String v -> v.ToString()
         | Scheme.Function _ -> "<function>"
         | Scheme.Null -> "<null>"
         | Scheme.List l ->
-            let result = 
+            let result =
                 match l with
                 | [] -> ""
-                | l -> 
-                    l 
-                    |> Seq.map toString 
-                    |> Seq.reduce (fun acc v -> acc + "," + v) 
+                | l ->
+                    l
+                    |> Seq.map toString
+                    |> Seq.reduce (fun acc v -> acc + "," + v)
             "[" + result + "]"
 
     [<JavaScript>]
-    override this.Body = 
+    override this.Body =
         let env = WebScheme.Functions.builtins () |> ref
-        
-        let options = 
+
+        let options =
             CodeMirror.EditorOptions(
                 Height = "300px",
                 StyleSheet = "css/schemecolors.css",
@@ -43,7 +43,7 @@ type WebSchemeUI() =
                 AutoMatchParens = true,
                 DisableSpellcheck = true,
                 LineNumbers = true,
-                Path = "Scripts/"
+                Path = "/CodeMirror/"
             )
         let text = TextArea[]
         let editor = ref None
@@ -51,12 +51,12 @@ type WebSchemeUI() =
 
         let result = Div [Width "100%"; Attr.Class "output"]
 
-        let appendResult (v : Scheme.SchemeValue) cls = 
+        let appendResult (v : Scheme.SchemeValue) cls =
             let value = Div [ Span [Attr.Class (cls + " message")] -< [Text (toString v)]]
             result.Append(value)
             result.JQuery.ScrollTop(result.JQuery.Height()).Ignore
 
-        let evaluate = 
+        let evaluate =
             Button [Text "Evaluate"]
             |>! OnClick (fun _ _ ->
                 let text = CodeMirror.getCode editor.Value.Value
@@ -71,14 +71,14 @@ type WebSchemeUI() =
                     e -> appendResult (Scheme.String (e.ToString())) "error"
                 )
 
-        let clear = 
+        let clear =
             Button [Text "Clear"]
             |>! OnClick (fun _ _ ->
                 env := Functions.builtins()
                 result.Clear()
             )
-        Table [Width "100%"; Border "0.8"] -< 
-        [ 
+        Table [Width "100%"; Border "0.8"] -<
+        [
             TR [Height "300px"] -< [  TD [ text ] ]
             TR [TD [evaluate; clear] ]
             TR [Height "200px"] -< [TD [result] ]

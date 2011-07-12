@@ -294,7 +294,7 @@ var select = {};
         else
           end = middle - 1;
       }
-      
+
       if (start == 0) {
         var test1 = selection.createRange(), test2 = test1.duplicate();
         test2.moveToElementText(container);

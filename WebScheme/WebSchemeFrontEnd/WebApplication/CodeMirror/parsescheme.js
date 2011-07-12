@@ -54,8 +54,8 @@ var SchemeParser = Editor.Parser = (function() {
 
 	// If we scanned backward too far, we couldn't find a context.  Just
 	// return the empty context.
-	if (isEmptyPair(tokenStack)) { 
-	    return EMPTY_CONTEXT; 
+	if (isEmptyPair(tokenStack)) {
+	    return EMPTY_CONTEXT;
 	}
 
 	// Position tokenStack to the next token beyond.
@@ -64,7 +64,7 @@ var SchemeParser = Editor.Parser = (function() {
 	// We now scan backwards to closest newline to figure out the column
 	// number:
 	while (! isEmptyPair(tokenStack)) {
-	    if(pairFirst(tokenStack).type === 'whitespace' && 
+	    if(pairFirst(tokenStack).type === 'whitespace' &&
 	       pairFirst(tokenStack).value === '\n') {
 		break;
 	    }
@@ -84,7 +84,7 @@ var SchemeParser = Editor.Parser = (function() {
 			       column: column });
 	    }
 
-	    if (tokens[j].type === 'whitespace' && 
+	    if (tokens[j].type === 'whitespace' &&
 		tokens[j].value === '\n') {
 		column = 0;
 		line++;
@@ -155,7 +155,7 @@ var SchemeParser = Editor.Parser = (function() {
 
     //////////////////////////////////////////////////////////////////////
 
-    var BEGIN_LIKE_KEYWORDS = ["case-lambda", 
+    var BEGIN_LIKE_KEYWORDS = ["case-lambda",
 			       "compound-unit",
 			       "compound-unit/sig",
 			       "cond",
@@ -221,7 +221,7 @@ var SchemeParser = Editor.Parser = (function() {
     var defineLikeIndentation = function(context) {
 	var i = findContextElement(context, 0);
 	if (i === -1) { return 0; }
-	return context[i].column +1; 
+	return context[i].column +1;
     };
 
     //////////////////////////////////////////////////////////////////////
@@ -335,8 +335,8 @@ var SchemeParser = Editor.Parser = (function() {
 	var i = findContextElement(context, 0);
 	if (i === -1) { return 0; }
 	var j = findContextElement(context, 1);
-	if (j === -1) { 
-	    return context[i].column + 4; 
+	if (j === -1) {
+	    return context[i].column + 4;
 	} else {
 	    return context[i].column + 1;
 	}
@@ -389,7 +389,7 @@ var SchemeParser = Editor.Parser = (function() {
 		return currentIndentation;
 	    }
 
-	    var indentationContext = 
+	    var indentationContext =
 		getIndentationContext(tokenStack);
 	    return calculateIndentationFromContext(indentationContext,
 						   currentIndentation);		
