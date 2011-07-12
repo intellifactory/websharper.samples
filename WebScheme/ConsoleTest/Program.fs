@@ -1,5 +1,6 @@
 ﻿open System
 open WebScheme
+open WebScheme.Scheme
 
 type Test = string * Scheme.SchemeValue list
 
@@ -18,8 +19,19 @@ let runTest ((source, values) : Test) =
         match result with
         | Scheme.Null -> ()
         | _ -> printfn "%A" result
-    
-    if List.length values = List.length results || (values, results) ||> Seq.forall2 (fun o1 o2 -> Collections.Comparer.Default.Compare(o1, o2) = 0) 
+
+
+    let rec compareSchemeValue (x:Scheme.SchemeValue, y:Scheme.SchemeValue) =
+        match (x,y) with
+        | (Int x, Int y) -> x = y
+        | (String x, String y) -> x = y
+        | (Bool x, Bool y) -> x = y
+        | (List x, List y) -> (x,y) ||> Seq.forall2 (fun o1 o2 -> compareSchemeValue(o1,o2) ) 
+        | (Null, Null) -> true
+        | (_, _) -> false
+
+
+    if List.length values = List.length results && (values, results) ||> Seq.forall2 (fun o1 o2 -> compareSchemeValue(o1, o2))
     then ()
     else 
         printfn "Error in test"
@@ -96,7 +108,7 @@ let tests = [
 (+ (square x) (square y)))
 (define (f a)
 (sum-of-squares (+ a 1) (* a 2)))
-(f 5)    ", [Null; Null; Null; Int 120];
+(f 5)    ", [Null; Null; Null; Int 136];
 
 "(letrec ((fact
         (lambda (n)
