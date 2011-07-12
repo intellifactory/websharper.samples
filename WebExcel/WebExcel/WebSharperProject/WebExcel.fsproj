@@ -6,11 +6,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6f62ee58-9977-43cc-80e4-d05d2edbdabc}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WebSharperProject</RootNamespace>
-    <AssemblyName>WebExcel</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <Name>WebExcel</Name>
-    <TargetFrameworkProfile />
+    <RootNamespace>$(Name)</RootNamespace>
+    <AssemblyName>$(Name)</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="IntelliFactory.WebSharper.JQueryUI">
-      <HintPath>..\bin\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
+      <HintPath>..\..\..\Assemblies\IntelliFactory.WebSharper.JQueryUI.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="System" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
