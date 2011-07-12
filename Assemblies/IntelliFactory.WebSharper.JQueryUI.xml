@@ -303,6 +303,11 @@
  Creates a new button given a configuration object.
 </summary>
 </member>
+<member name="M:IntelliFactory.WebSharper.JQueryUI.Button.New(Microsoft.FSharp.Core.FSharpFunc`2{Microsoft.FSharp.Core.Unit,IntelliFactory.WebSharper.Html.Element},IntelliFactory.WebSharper.JQueryUI.ButtonConfiguration)">
+<summary>
+ Creates a new button given an element and a configuration object.
+</summary>
+</member>
 <member name="M:IntelliFactory.WebSharper.JQueryUI.Button.New(IntelliFactory.WebSharper.Html.Element,IntelliFactory.WebSharper.JQueryUI.ButtonConfiguration)">
 <summary>
  Creates a new button given an element and a configuration object.
@@ -1480,6 +1485,11 @@
 <member name="">
 
 </member>
+<member name="P:IntelliFactory.WebSharper.JQueryUI.Slider.Values(System.Int32[])">
+<summary>
+ Gets or sets the slider value.
+</summary>
+</member>
 <member name="P:IntelliFactory.WebSharper.JQueryUI.Slider.Value(System.Int32)">
 <summary>
  Gets or sets the slider value.
@@ -1500,10 +1510,21 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="P:IntelliFactory.WebSharper.JQueryUI.Slider.Values">
+<summary>
+ Gets or sets the slider value.
+</summary>
+</member>
 <member name="P:IntelliFactory.WebSharper.JQueryUI.Slider.Value">
 <summary>
  Gets or sets the slider value.
 </summary>
+</member>
+<member name="">
+
 </member>
 <member name="">
 
@@ -1894,7 +1915,7 @@
  Event triggered when a tab is showed.
 </summary>
 </member>
-<member name="M:IntelliFactory.WebSharper.JQueryUI.Tabs.OnSelect(Microsoft.FSharp.Core.FSharpFunc`2{IntelliFactory.WebSharper.JQuery.Event,Microsoft.FSharp.Core.Unit})">
+<member name="M:IntelliFactory.WebSharper.JQueryUI.Tabs.OnSelect(Microsoft.FSharp.Core.FSharpFunc`2{IntelliFactory.WebSharper.JQuery.Event,Microsoft.FSharp.Core.FSharpFunc`2{IntelliFactory.WebSharper.JQueryUI.TabsInfo,Microsoft.FSharp.Core.Unit}})">
 <summary>
  Event triggered when a tab is selcted.
 </summary>
@@ -2090,6 +2111,21 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:IntelliFactory.WebSharper.JQueryUI.AccordianInternal">
 
 </member>
@@ -2109,6 +2145,12 @@
 
 </member>
 <member name="T:IntelliFactory.WebSharper.JQueryUI.DatepickerInternal">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
 
 </member>
 <member name="">
@@ -2178,30 +2220,6 @@
 
 </member>
 <member name="T:IntelliFactory.WebSharper.JQueryUI.TabsInternal">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="T:IntelliFactory.WebSharper.JQueryUI.Test">
-
-</member>
-<member name="">
 
 </member>
 <member name="">

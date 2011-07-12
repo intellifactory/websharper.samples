@@ -29,7 +29,7 @@ module State =
           Y : int
           Content : string }
 
-    let private key = "StickyNotesState"    
+    let private key = "StickyNotesState"
     let private doSave (notes : Note list) = 
         HttpContext.Current.Application.Set(key, notes)
         notes
@@ -68,13 +68,13 @@ module Notes =
 
 
     [<JavaScript>]
-    let notes = ref Map.empty       
+    let notes = ref Map.empty
 
     // configuration data for JQuery.animate function
     type AnimateConfiguration = { opacity : float }
 
     [<JavaScript>]
-    let main () =         
+    let main () =
         
         // moves specified element to the top in z-order 
         let maxZ = ref 0
@@ -160,4 +160,7 @@ module Notes =
 type Body() = 
     inherit Web.Control()
     [<JavaScript>]
-    override this.Body = Notes.main () :> _
+    override this.Body = 
+        Div [Text "hello"]
+        :> _
+        // Notes.main () :> _
