@@ -56,7 +56,7 @@ module HelloWorld =
     in your pagelet class derived from IntelliFactory.WebSharper.Web.Control.
     Here, `HelloWorld.Main` points to the function that implements your pagelet logic.</p>
 ]*)
-type HelloWorldViewer[<JavaScript>]() =
+type HelloWorldViewer()=
     inherit Web.Control()
 
     [<JavaScript>]
