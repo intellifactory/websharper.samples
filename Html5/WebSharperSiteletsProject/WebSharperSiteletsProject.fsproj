@@ -31,8 +31,6 @@
   </PropertyGroup>
   <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
-    <Compile Include="SamplePage.template.xml" />
-    <Compile Include="SamplePage.template.fs" />
     <Compile Include="Canvas.fs" />
     <Compile Include="CanvasAnimation.fs" />
     <Compile Include="DataStorage.fs" />

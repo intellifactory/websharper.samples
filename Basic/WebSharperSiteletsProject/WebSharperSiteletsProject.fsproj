@@ -31,8 +31,6 @@
   </PropertyGroup>
   <Import Project="$(WEBSHARPER_HOME)\IntelliFactory.WebSharper.Sitelets.targets" />
   <ItemGroup>
-    <Content Include="SamplePage.template.xml" />
-    <Compile Include="SamplePage.fs" />
     <Compile Include="Info.fs" />
     <Compile Include="Autocomplete.fs" />
     <Compile Include="Calculations.fs" />

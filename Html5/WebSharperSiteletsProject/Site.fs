@@ -18,36 +18,57 @@ module Controls =
         |> Seq.filter (fun t -> typeof<Web.Control>.IsAssignableFrom t)
         |> Seq.map (fun t ->
             let name = t.Name.Substring(0, t.Name.Length - "Viewer".Length)
-            name, t
-            )
+            (name, t))
         |> List.ofSeq
+
+module Skin =
+
+    type Page =
+        {
+            Back : list<Content.HtmlElement>
+            Caption : list<Content.HtmlElement>
+            Content : list<Content.HtmlElement>
+            Title : string
+        }
+
+    let MainTemplate =
+        let path = HttpContext.Current.Server.MapPath("~/Template.html")
+        Content.Template<Page>(path)
+            .With("Back", fun x -> x.Back)
+            .With("Caption", fun x -> x.Caption)
+            .With("Content", fun x -> x.Content)
+            .With("Title", fun x -> x.Title)
 
 module Site =
     let pages =
         Controls.list
-            |> List.map (fun (name, t) ->
-                let el = Activator.CreateInstance(t) :?> Web.Control
-                let page = Templates.SamplePage.SamplePage (Some name) <|
-                                {
-                                    Back = fun ctx -> [A [HRef (ctx.Link Index)] -< [Text "Back"]]
-                                    Caption = fun _ -> [Div [Text name]]
-                                    Content = fun _ -> [Div [el]]
-                                }
-                name, page
-                )
-            |> Map.ofSeq
-    let index = Templates.SamplePage.SamplePage (Some "Index") <|
-                    {
-                        Back = fun _ -> []
-                        Caption = fun _ -> [Div [Text "Samples"]]
-                        Content = fun ctx ->
-                            [
-                                Table [
-                                    for name, _ in Controls.list do
-                                        yield TR [ TD [ A [HRef (ctx.Link (Sample name))] -< [Text name] ]]
-                                ]
-                            ]
-                    }
+        |> List.map (fun (name, t) ->
+            let el = Activator.CreateInstance(t) :?> Web.Control
+            let page =
+                Content.WithTemplate Skin.MainTemplate <| fun ctx ->
+                {
+                    Back = [A [HRef (ctx.Link Index)] -< [Text "Back"]]
+                    Caption = [Div [Text name]]
+                    Content = [Div [el]]
+                    Title = "WebSharper HTML5 Samples"
+                }
+            (name, page))
+        |> Map.ofSeq
+
+    let index =
+        Content.WithTemplate Skin.MainTemplate <| fun ctx ->
+        {
+            Back = []
+            Caption = [Div [Text "Samples"]]
+            Content =
+                [
+                    Table [
+                        for name, _ in Controls.list do
+                            yield TR [ TD [ A [HRef (ctx.Link (Sample name))] -< [Text name] ]]
+                    ]
+                ]
+            Title = "WebSharper HTML5 Samples"
+        }
 
     let controller =
         let handler = function
