@@ -193,7 +193,7 @@ module GoogleMaps =
             let options = new MapOptions(0, center, mapIds.[0])
             options.MapTypeControlOptions <- mapControlOptions
             map.SetOptions options
-            JavaScript.Set map.MapTypes "Moon" it 
+            map.MapTypes.Set("Moon", it) 
             // TODO: Add the credit part
             ()
 
