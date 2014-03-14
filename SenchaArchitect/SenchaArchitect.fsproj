@@ -71,5 +71,5 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <Import Project="..\packages\WebSharper.2.5.92.21\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper.2.5.92.21\build\WebSharper.targets')" />
+  <Import Project="..\packages\WebSharper.2.5.98.29\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper.2.5.98.29\build\WebSharper.targets')" />
 </Project>

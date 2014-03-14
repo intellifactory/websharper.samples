@@ -29,7 +29,7 @@ Ext.application({
     views: [
         'MainView'
     ],
-    appFolder: '/SenchaApp',
+    appFolder: 'SenchaApp',
     name: 'MyApp',
 
     launch: function() {

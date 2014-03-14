@@ -63,7 +63,7 @@ type SenchaArchitectViewer() =
     [<JavaScript>]
     override this.Body =
         JQuery.Of("head")
-            .Append("""<script type="text/javascript" src="/app.js"></script>""")
+            .Append("""<script type="text/javascript" src="app.js"></script>""")
             |> ignore
 
         upcast Div [] |>! OnAfterRender (fun el ->
