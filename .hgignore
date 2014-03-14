@@ -4,3 +4,5 @@ _ReSharper
 .*\.user
 .*\.suo
 Scripts
+syntax: glob
+packages/*
