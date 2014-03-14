@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Web
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{6F111164-4D5C-47DE-A617-EC8623A2B755}"
+	ProjectSection(SolutionItems) = preProject
+		app\config.xml = app\config.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "www", "www", "{5A4A992F-7167-467E-B9B9-261358D3FF8B}"
+	ProjectSection(SolutionItems) = preProject
+		demo\www\index.html = demo\www\index.html
+	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PhoneGapDemo", "src\PhoneGapDemo.fsproj", "{870776E8-C839-4EE0-8E3F-12B2401A5653}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7D6B01F9-DEB1-411D-B788-23FC9C3B0801}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{870776E8-C839-4EE0-8E3F-12B2401A5653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870776E8-C839-4EE0-8E3F-12B2401A5653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870776E8-C839-4EE0-8E3F-12B2401A5653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870776E8-C839-4EE0-8E3F-12B2401A5653}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A4A992F-7167-467E-B9B9-261358D3FF8B} = {6F111164-4D5C-47DE-A617-EC8623A2B755}
+	EndGlobalSection
+EndGlobal
