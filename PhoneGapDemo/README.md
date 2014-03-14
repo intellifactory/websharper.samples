@@ -11,10 +11,12 @@ Android, Windows Phone and Windows 8.
 ## Building
 
 Besides normal [WebSharper][ws] requirements you will need [npm][npm]
-and the [cordova][cordova-tool] tool, which can be obtained like this:
+(Windows users can obtain this tool by installing
+[nodejs](http://nodejs.org/)) and the [cordova][cordova-tool] tool,
+which can be obtained like this:
 
     npm install -g cordova
-    
+
 First, perform a regular WebSharper build, which populates assets
 under `app/www`, but does not perform the actual build.  The `app`
 folder is the root of your Cordova application, managed by the
