@@ -49,7 +49,7 @@ manuals specific to your target platform and SDK.
 
 Binary debug build for Android:
 
-https://bitbucket.org/IntelliFactory/websharper.samples/downloads/PhoneGapDemo-debug.apk
+[PhoneGapDemo-debug.apk](https://bitbucket.org/IntelliFactory/websharper.samples/downloads/PhoneGapDemo-debug.apk)
 
 ## License
 
