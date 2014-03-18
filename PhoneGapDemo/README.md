@@ -45,6 +45,12 @@ correctly, you can:
 More information can be found in [PhoneGap][pg] documentation and
 manuals specific to your target platform and SDK.
 
+## Binaries
+
+Binary debug build for Android:
+
+https://bitbucket.org/IntelliFactory/websharper.samples/downloads/PhoneGapDemo-debug.apk
+
 ## License
 
 All files in this demo are released under Apache 2.0 License.
