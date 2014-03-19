@@ -22,8 +22,8 @@ module Client =
         |>! OnAfterRender (fun el ->
             JQuery.Of el.Body |> Mobile.Page.Init)
 
-    let PageWithBackBtnDiv id' cont =
-        PageDiv id' [ HTML5.Attr.Data "add-back-btn" "true" ] -< cont
+    let HeaderWithBackBtnDiv cont =
+        HeaderDiv [ HTML5.Attr.Data "add-back-btn" "true" ] -< cont
 
     let ListViewUL cont =
         UL [
@@ -86,8 +86,8 @@ module Client =
         match plugin with
         | None ->
             JQMPage.Create <|
-                PageWithBackBtnDiv id [
-                    HeaderDiv [ H1 [ Text header ] ]
+                PageDiv id [
+                    HeaderWithBackBtnDiv [ H1 [ Text header ] ]
                     ContentDiv [ Text "Plugin not available" ]
                 ]
         | Some plugin ->
@@ -95,8 +95,8 @@ module Client =
             {
                 page with
                     Html =
-                        PageWithBackBtnDiv id [
-                            HeaderDiv [ H1 [ Text header ] ]
+                        PageDiv id [
+                            HeaderWithBackBtnDiv [ H1 [ Text header ] ]
                             page.Html
                         ]
             }
