@@ -1,8 +1,14 @@
+\~$
 .*/bin
 .*/obj
 _ReSharper
 .*\.user
 .*\.suo
+^PhoneGapDemo/app/www/websharper
+^PhoneGapDemo/app/platforms/
+^PhoneGapDemo/app/plugins/
+^PhoneGapDemo/packages/
+^PhoneGapDemo/src/Content/
 Scripts
 syntax: glob
 packages/*
