@@ -10,9 +10,14 @@ type App = SenchaArchitect.App<"app.js">
 
 [<JavaScript>]
 module SenchaArchitectSample =
+    module Resources =
+        type AppJS() =
+            inherit Resources.BaseResource("app.js")
+
     [<Require(typeof<Resources.ExtAll>)>]
     [<Require(typeof<Resources.ExtThemeNeptune>)>]
     [<Require(typeof<Resources.ExtAllNeptuneCss>)>]
+    [<Require(typeof<Resources.AppJS>)>]
     let initMainView() =        
         let view = App.View.MainView.MainView
 
@@ -62,10 +67,6 @@ type SenchaArchitectViewer() =
 
     [<JavaScript>]
     override this.Body =
-        JQuery.Of("head")
-            .Append("""<script type="text/javascript" src="app.js"></script>""")
-            |> ignore
-
         upcast Div [] |>! OnAfterRender (fun el ->
             Ext.OnReady(SenchaArchitectSample.initMainView, null, null)
         )
