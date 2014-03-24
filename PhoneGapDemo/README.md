@@ -39,8 +39,8 @@ For example, assuming you have Android SDK and paths configured
 correctly, you can:
 
     cordova platforms add android
-    cordova android build
-    cordova android run
+    cordova build android
+    cordova run android
     
 More information can be found in [PhoneGap][pg] documentation and
 manuals specific to your target platform and SDK.
