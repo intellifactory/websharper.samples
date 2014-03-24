@@ -9,10 +9,10 @@ open IntelliFactory.WebSharper.Sitelets
 
 [<JavaScript>]
 module Main =
-
     let Program =
         JavaScript.Log("==> starting Program")
         let currentPage = ref None
+                        
         Events.deviceReady.add <| fun () ->
             JavaScript.Log("==> deviceReady")
             Mobile.Events.PageBeforeChange.On(JQuery.Of Dom.Document.Current, fun (e, data) ->

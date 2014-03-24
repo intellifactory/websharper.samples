@@ -31,10 +31,11 @@ module Client =
             HTML5.Attr.Data "inset" "true"
         ] -< cont
 
-    let Row text value =
-        TR [
-            TD [ Div [ Text text ] ]
-            TD [ value ]
+    let DList cont =
+        DL [
+            for dt, dd in cont do
+                yield DT [ Text dt ]
+                yield DD [ dd ]
         ]
 
     type JQMPage =
@@ -107,38 +108,46 @@ module Client =
             let xDiv, yDiv, zDiv = Div [], Div [], Div []
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
-                Table [
-                    Row "X: " xDiv
-                    Row "Y: " yDiv
-                    Row "Z: " zDiv
+                DList [
+                    "X: ", xDiv
+                    "Y: ", yDiv
+                    "Z: ", zDiv
                 ]
             ]
             |> WithLoad (fun () ->
                 watchHandle :=
-                    plugin.watchAcceleration((fun acc ->
-                        xDiv.Text <- string acc.x
-                        yDiv.Text <- string acc.y
-                        zDiv.Text <- string acc.z), ignore))
+                    plugin.watchAcceleration(
+                        fun acc ->
+                            xDiv.Text <- string acc.x
+                            yDiv.Text <- string acc.y
+                            zDiv.Text <- string acc.z
+                    ,   ignore 
+                    ,   DeviceMotion.Options(frequency = 500.))
+                    )
             |> WithUnload (fun () ->
-                plugin.clearWatch(!watchHandle))
+                plugin.clearWatch(!watchHandle)
+                watchHandle := null 
+            )
 
     let CameraPage =
         lazy
         CreatePluginPage "camera" "Camera" Camera.getPlugin <| fun plugin ->
-            let img = Img [ Attr.Style "width: 200px" ]
+            let img = Img [ Attr.Style "width: 100%" ]
             let plugin = Camera.getPlugin()
             let popoverHandle = ref null
             JQMPage.Create <| ContentDiv [
                 Button [ Text "Get picture" ]
                 |>! OnClick (fun _ _ ->
-                    let opts = Camera.Options()
-                    opts.encodingType <- Camera.EncodingType1.JPEG
-                    opts.destinationType <- Camera.DestinationType1.FILE_URI
-                    plugin.getPicture((fun fileURI ->
-                        img.SetAttribute("src", fileURI)),
-                        ignore,
-                        opts)
-                    |> ignore)
+                    plugin.getPicture(
+                        fun fileURI ->
+                            img.SetAttribute("src", fileURI)
+                    ,   ignore
+                    ,   Camera.Options
+                        (   encodingType = Camera.EncodingType1.JPEG
+                        ,   destinationType = Camera.DestinationType1.FILE_URI
+                        )
+                    ) |> ignore
+                )
                 img
             ]
 
@@ -149,16 +158,22 @@ module Client =
             let plugin = DeviceOrientation.getPlugin()
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
-                Div [ Text "Heading:" ]
-                headingDiv
+                DList [ 
+                    "Heading:", headingDiv
+                ]
             ]
             |> WithLoad (fun () ->
                 watchHandle :=
-                    plugin.watchHeading((fun ori ->
-                        headingDiv.Text <- string ori.magneticHeading),
-                        ignore))
+                    plugin.watchHeading(
+                        fun ori ->
+                            headingDiv.Text <- string ori.magneticHeading
+                    ,   ignore
+                    )
+            )
             |> WithUnload (fun () ->
-                plugin.clearWatch(!watchHandle))
+                plugin.clearWatch(!watchHandle)    
+                watchHandle := null 
+            )
 
     let GPSPage =
         lazy
@@ -167,21 +182,26 @@ module Client =
             let plugin = Geolocation.getPlugin()
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
-                Table [
-                    Row "Latitude: " latDiv
-                    Row "Longitude: " lngDiv
-                    Row "Altitude: " altDiv
+                DList [
+                    "Latitude: " , latDiv
+                    "Longitude: ", lngDiv
+                    "Altitude: " , altDiv
                 ]
             ]
             |> WithLoad (fun () ->
                 watchHandle :=
-                    plugin.watchPosition((fun pos ->
-                        latDiv.Text <- string pos.coords.latitude
-                        lngDiv.Text <- string pos.coords.longitude
-                        altDiv.Text <- string pos.coords.altitude),
-                        ignore))
+                    plugin.watchPosition(
+                        fun pos ->
+                            latDiv.Text <- string pos.coords.latitude
+                            lngDiv.Text <- string pos.coords.longitude
+                            altDiv.Text <- string pos.coords.altitude
+                    ,   ignore
+                    )
+            )
             |> WithUnload (fun () ->
-                plugin.clearWatch(!watchHandle))
+                plugin.clearWatch(!watchHandle)
+                watchHandle := null 
+            )
 
     let ContactsPage =
         lazy
@@ -200,7 +220,8 @@ module Client =
                         |> contactsUL.Append
                     JQuery.Of contactsUL.Body |> Mobile.ListView.Refresh
                 plugin.find([| "displayName" |], onFound, ignore,
-                    Contacts.FindOptions(multiple = true)))
+                    Contacts.FindOptions(multiple = true))
+            )
 
     let GetJQMPage pageRef =
         match pageRef with
