@@ -46,13 +46,6 @@
     <MakeDir Directories="$(D)" Condition="!Exists('$(D)')" />
     <Copy SourceFiles="@(ContentFiles)" DestinationFolder="$(D)" SkipUnchangedFiles="true" />
   </Target>
-  <Import Project="..\packages\WebSharper.2.5.99.30\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper.2.5.99.30\build\WebSharper.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WebSharper.2.5.99.30\build\WebSharper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WebSharper.2.5.99.30\build\WebSharper.targets'))" />
-  </Target>
   <ItemGroup>
     <Compile Include="Client.fs" />
     <Compile Include="Main.fs" />
@@ -63,15 +56,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="IntelliFactory.WebSharper.JQuery.Mobile">
-      <HintPath>..\packages\WebSharper.JQueryMobile.2.5.3.197\lib\net40\IntelliFactory.WebSharper.JQuery.Mobile.dll</HintPath>
+      <HintPath>..\packages\WebSharper.JQueryMobile.2.5.4.198\lib\net40\IntelliFactory.WebSharper.JQuery.Mobile.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IntelliFactory.WebSharper.PhoneGap">
-      <HintPath>..\packages\WebSharper.PhoneGap.2.5.15\lib\net40\IntelliFactory.WebSharper.PhoneGap.dll</HintPath>
+      <HintPath>..\packages\WebSharper.PhoneGap.2.5.16\lib\net40\IntelliFactory.WebSharper.PhoneGap.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IntelliFactory.WebSharper.TypeScript.Lib">
-      <HintPath>..\packages\WebSharper.TypeScript.Lib.2.5.8.9\lib\net40\IntelliFactory.WebSharper.TypeScript.Lib.dll</HintPath>
+      <HintPath>..\packages\WebSharper.TypeScript.Lib.2.5.10.11\lib\net40\IntelliFactory.WebSharper.TypeScript.Lib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
@@ -80,4 +73,11 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
   </ItemGroup>
+  <Import Project="..\packages\WebSharper.2.5.99.30\build\WebSharper.targets" Condition="Exists('..\packages\WebSharper.2.5.99.30\build\WebSharper.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\WebSharper.2.5.99.30\build\WebSharper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WebSharper.2.5.99.30\build\WebSharper.targets'))" />
+  </Target>
 </Project>

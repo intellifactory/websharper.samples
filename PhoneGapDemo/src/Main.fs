@@ -12,17 +12,22 @@ module Main =
     let Program =
         JavaScript.Log("==> starting Program")
         let currentPage = ref None
+        let isAtHome = ref true
                         
         Events.deviceReady.add <| fun () ->
             JavaScript.Log("==> deviceReady")
             Mobile.Events.PageBeforeChange.On(JQuery.Of Dom.Document.Current, fun (e, data) ->
                 match data.ToPage with
                 | :? string as pageUrl ->
-                    match Client.GetJQMPage pageUrl with
+                    let hashIndex = pageUrl.IndexOf("#")
+                    if hashIndex < 0 then e.PreventDefault() else
+                    let pageRef = pageUrl.[hashIndex ..]
+                    isAtHome := pageRef = "#home"
+                    match Client.GetJQMPage pageRef with
                     | Some pageObj ->
                         let body = JQuery.Of "body"
                         let toPage =
-                            match body.Children pageUrl with
+                            match body.Children pageRef with
                             | p when p.Length = 0 ->
                                 let page = pageObj.Html
                                 body.Append page.Body |> ignore
@@ -32,6 +37,17 @@ module Main =
                         !currentPage |> Option.iter (fun (p: Client.JQMPage) -> p.Unload())
                         pageObj.Load()
                         currentPage := Some pageObj
-                    | None _ -> ()
-                | _ -> ())
-            Client.mobile.ChangePage "#home"
+                    | None _ -> e.PreventDefault()
+                | _ -> ()
+            )
+                                                                              
+            Mobile.Events.SwipeRight.On(JQuery.Of Dom.Document.Current, fun _ ->
+                if not !isAtHome then
+                    Html5.Window.Self.History.Back()
+            )
+
+            Mobile.Events.SwipeLeft.On(JQuery.Of Dom.Document.Current, fun _ ->
+                Html5.Window.Self.History.Forward()
+            )
+
+            PageContainer.Change(JQuery.Of ":mobile-pagecontainer", "#home", ChangePageConfig())

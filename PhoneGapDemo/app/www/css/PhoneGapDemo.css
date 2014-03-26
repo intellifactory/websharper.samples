@@ -1,12 +1,14 @@
-dl > dt {
-    float: left;
-    margin-top: 15px;
-    margin-left:5px;
+dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
 }
-dl > dd {
-    float: left;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-left: 10px;
-    margin-right: 25px;
+dt:after {
+  content: ":";
+}
+dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
 }

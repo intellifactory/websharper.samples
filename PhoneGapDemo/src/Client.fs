@@ -59,7 +59,7 @@ module Client =
         { page with Unload = unload }
 
     let ChangePage (page: string) =
-        mobile.ChangePage(page, ChangePageConfig(Transition = "slide"))
+        PageContainer.Change(JQuery.Of ":mobile-pagecontainer", page, ChangePageConfig(Transition = "slide"))
 
     let HomePage =
         let link text (page: string) =
@@ -109,9 +109,9 @@ module Client =
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
                 DList [
-                    "X: ", xDiv
-                    "Y: ", yDiv
-                    "Z: ", zDiv
+                    "X", xDiv
+                    "Y", yDiv
+                    "Z", zDiv
                 ]
             ]
             |> WithLoad (fun () ->
@@ -159,7 +159,7 @@ module Client =
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
                 DList [ 
-                    "Heading:", headingDiv
+                    "Heading", headingDiv
                 ]
             ]
             |> WithLoad (fun () ->
@@ -183,9 +183,9 @@ module Client =
             let watchHandle = ref null
             JQMPage.Create <| ContentDiv [
                 DList [
-                    "Latitude: " , latDiv
-                    "Longitude: ", lngDiv
-                    "Altitude: " , altDiv
+                    "Latitude" , latDiv
+                    "Longitude", lngDiv
+                    "Altitude" , altDiv
                 ]
             ]
             |> WithLoad (fun () ->
