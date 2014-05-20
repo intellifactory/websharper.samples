@@ -1,0 +1,54 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Person",
+        "idProperty": "Id"
+    },
+    "designerId": "f4f5b6be-eaf6-4b17-ba77-f9cd00e1cdee",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Id",
+                "type": "int"
+            },
+            "designerId": "72848dc1-f9a4-4eec-a3d8-13fa1ca3a9cb"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Name",
+                "type": "string"
+            },
+            "designerId": "0058c1c7-07bf-48b3-aa24-b9c8c4838fb9"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "Age",
+                "type": "int"
+            },
+            "designerId": "6bcf8232-82e2-4d7e-9557-1718c1c82f03"
+        }
+    ]
+}

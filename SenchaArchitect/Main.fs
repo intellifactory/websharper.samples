@@ -1,4 +1,4 @@
-namespace HtmlApp1
+namespace Website
 
 open IntelliFactory.Html
 open IntelliFactory.WebSharper
@@ -6,6 +6,16 @@ open IntelliFactory.WebSharper.Sitelets
 
 type Action =
     | Home
+
+module Controls =
+
+    [<Sealed>]
+    type EntryPoint() =
+        inherit Web.Control()
+
+        [<JavaScript>]
+        override __.Body =
+            Client.Main() :> _
 
 module Skin =
     open System.Web
@@ -29,20 +39,28 @@ module Skin =
             }
 
 module Site =
-
     let HomePage =
         Skin.WithTemplate "HomePage" <| fun ctx ->
             [
-                Div [new Samples.SenchaArchitectViewer()]
+                Div [new Controls.EntryPoint()]
             ]
 
-    let Main = Sitelet.Content "/" Home HomePage
+    let Main =
+        Sitelet.Sum [
+            Sitelet.Content "/" Home HomePage
+        ]
 
 [<Sealed>]
 type Website() =
     interface IWebsite<Action> with
         member this.Sitelet = Site.Main
         member this.Actions = [Home]
+
+type Global() =
+    inherit System.Web.HttpApplication()
+
+    member g.Application_Start(sender: obj, args: System.EventArgs) =
+        ()
 
 [<assembly: Website(typeof<Website>)>]
 do ()

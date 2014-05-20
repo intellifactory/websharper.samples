@@ -1,72 +1,136 @@
-namespace Samples
+namespace Website
 
 open IntelliFactory.WebSharper
-open IntelliFactory.WebSharper.Html5
 open IntelliFactory.WebSharper.Html
 open IntelliFactory.WebSharper.JQuery
 open IntelliFactory.WebSharper.ExtJS
 
-type App = SenchaArchitect.App<"app.js">
+type App = SenchaArchitect.App<"app.js", Inherit = true>
 
 [<JavaScript>]
-module SenchaArchitectSample =
-    module Resources =
-        type AppJS() =
-            inherit Resources.BaseResource("app.js")
+module Client =    
+    type LoadMask(comp : Ext.Component) =
+        do comp.SetLoading(true) |> ignore
+        
+        interface System.IDisposable with
+            member this.Dispose() = comp.SetLoading(false) |> ignore
+    
+    [<Inline "$x || $y">]
+    let (||?) (x: 'a) (y: 'a) = X<'a> 
 
-    [<Require(typeof<Resources.ExtAll>)>]
-    [<Require(typeof<Resources.ExtThemeNeptune>)>]
-    [<Require(typeof<Resources.ExtAllNeptuneCss>)>]
-    [<Require(typeof<Resources.AppJS>)>]
-    let initMainView() =        
+    let MainView() = 
         let view = App.View.MainView.MainView
-
+        
         let grid = view.grid
         let form = view.form
-        let toolbar = form.toolbar
+        let gridToolbar = grid.toolbar
+        let formToolbar = form.toolbar
+
+        let isLoadingData = ref false
+        let loadData() =
+            if not !isLoadingData then
+                async {
+                    use _ = new LoadMask(grid)
+                    let! data = Remoting.GetAttending()
+                    data |> Array.map (fun p -> 
+                        box <| App.RawModel.Person(Name = p.Name, Age = p.Age)
+                    )
+                    |> App.Store.Persons.LoadData
+                }
+                |> Async.Start
+        
+        loadData()
+
+        grid.refreshTool.OnClick(loadData)
+                 
+        grid.uploadTool.OnClick(fun () ->
+            let data =
+                (App.Store.Persons.Snapshot ||? As App.Store.Persons.Data).GetRange()
+                |> As<App.Model.Person[]> |> Array.map (fun p ->
+                    {
+                        Name = p.Name
+                        Age  = p.Age
+                    }  
+                )
+            JavaScript.Log data
+            async {
+                let! res = Remoting.Save data
+                Ext.MessageBox.Alert("Success", string res + " records saved. (not really)")
+            }
+            |> Async.Start
+        )
+
+        let showAdults = ref false
+        let searchString = ref None
+
+        let setFilter() =
+            let store = App.Store.Persons
+            store.ClearFilter()
+            store.AddFilter [|
+                if !showAdults then
+                    yield box (fun (m: App.Model.Person) -> m.Age >= 18)
+                match !searchString with
+                | Some text ->
+                    yield box (fun (m: App.Model.Person) -> m.Name.Contains text)
+                | _ -> () 
+            |]
+
+        gridToolbar.showAdultsButton.OnToggle(fun (_, state) ->
+            showAdults := state
+            setFilter()
+        )
+
+        let prompt title msg (onOk: string -> unit) =
+            Ext.MessageBox.Prompt(title, msg,
+                As (function "ok", text -> onOk text | _ -> ())
+            )    
+
+        gridToolbar.searchButton.OnClick(fun () ->
+            prompt "Search" "Part of name:" (fun text ->
+                searchString := Some text
+                gridToolbar.searchLabel.SetText("Current search: '" + text + "'")
+                setFilter()
+            )
+        )  
+
+        gridToolbar.searchButton.menu.clearSearchItem.OnClick(fun () ->
+            searchString := None
+            gridToolbar.searchLabel.SetText("")
+            setFilter()
+        )
 
         grid.OnSelect(fun (_, m: Ext.data.Model) ->
-            let m = App.Model.Person(m)
-            form.SetValues <| App.View.MainView.Form.FieldValues(name = m.Name, age = m.Age)
+            form.LoadRecord(m) |> ignore
         )
 
         grid.OnSelectionchange(fun (_, sel) ->
             if Array.isEmpty sel then
-                toolbar.saveButton.Disable()
-                toolbar.deleteButton.Disable()
+                formToolbar.saveButton.Disable()
+                formToolbar.deleteButton.Disable()
             else
-                toolbar.saveButton.Enable()
-                toolbar.deleteButton.Enable()
+                formToolbar.saveButton.Enable()
+                formToolbar.deleteButton.Enable()
         )
 
-        toolbar.addButton.SetHandler <| fun () -> 
-            let sel = grid.GetSelectionModel().GetSelection()
-            let added =
-                if Array.isEmpty sel then
-                    let v = form.GetValues()    
-                    App.RawModel.Person(Name = v.name, Age = v.age).ToModel()
-                else App.RawModel.Person(Name = "", Age = 0).ToModel()
+        formToolbar.newButton.OnClick(fun () -> 
+            let added = App.RawModel.Person(Name = "", Age = 0).ToModel()
             App.Store.Persons.Add(added) |> ignore
             grid.GetSelectionModel().Select([| added.self |])
-
-        toolbar.deleteButton.SetHandler <| fun () ->
-            grid.GetSelectionModel().GetSelection() |> App.Store.Persons.Remove
-            form.SetValues <| App.View.MainView.Form.FieldValues(name = "", age = 0)
-
-        toolbar.saveButton.SetHandler <| fun () ->
-            let sel = grid.GetSelectionModel().GetSelection()
-            if not <| Array.isEmpty sel then 
-                let v = form.GetValues()
-                let m = App.Model.Person(sel.[0])
-                m.Age <- v.age
-                m.Name <- v.name
-                m.self.Commit()
-
-type SenchaArchitectViewer() =
-    inherit Web.Control()
-
-    [<JavaScript>]
-    override this.Body =
-        upcast Div [] |>! OnAfterRender (fun el ->
-            Ext.OnReady(SenchaArchitectSample.initMainView, null, null)
         )
+
+        formToolbar.deleteButton.OnClick(fun () ->
+            form.GetRecord() |> App.Store.Persons.Remove
+            form.SetValues <| App.View.MainView.Form.FieldValues(Name = "", Age = 0)
+        )
+
+        formToolbar.saveButton.OnClick(fun () ->
+            form.UpdateRecord() |> ignore
+            form.GetRecord().Commit()
+        )       
+       
+    [<Require(typeof<Resources.ExtAll>)>]
+    [<Require(typeof<Resources.ExtThemeNeptune>)>]
+    [<Require(typeof<Resources.ExtAllNeptuneCss>)>]
+    let Main () =
+        Ext.OnReady(As MainView, null, null)
+        Div []

@@ -1,0 +1,49 @@
+{
+    "name": "GridDetail",
+    "settings": {
+        "cmd": {
+            "license": "commercial"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "",
+        "exportPath": "../",
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "spacesToIndent": 4,
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "displayfield-ExtBox1-1632-inputEl": "Not Installed",
+        "displayfield-ExtBox1-1280-inputEl": "Not Installed"
+    },
+    "xdsVersion": "3.0.4",
+    "xdsBuild": 1386,
+    "schemaVersion": 1,
+    "upgradeVersion": 300000000004,
+    "framework": "ext42",
+    "viewOrderMap": {
+        "view": [
+            "ccf11f1b-c72a-44fc-9803-344ace6f3349"
+        ],
+        "store": [
+            "ad9c1e4a-2f94-49e7-b58f-977ae6da231d"
+        ],
+        "controller": [],
+        "model": [
+            "f4f5b6be-eaf6-4b17-ba77-f9cd00e1cdee"
+        ],
+        "resource": [
+            "ed1b2218-96e3-4f67-afee-45be463f92e9"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}
